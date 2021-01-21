@@ -127,6 +127,9 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   1. Add this feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
   2. log the reviews array to the console to check your work
 */
+reviews[7].feedback =
+	'this place is chill with really cool people, great for getting work done on weekdays';
+console.log(reviews);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function to return a review based on the index of the review in the array.
@@ -138,8 +141,9 @@ Use the getReviewByIndex function below to do the following:
   For example: getReviewByIndex(reviews,0) would return: "Daniela gave the restaurant a 5 star review, and their feedback was: Beautiful atmosphere and wonderful vegan options!"
 */
 
-function getReviewByIndex(/*Your code here*/) {
-	/*Your code here*/
+function getReviewByIndex(arr, index) {
+	const { name, rating, feedback } = arr[index];
+	return `${name} gave the restaurant a ${rating} star review, and their feedback was: ${feedback}`;
 }
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -153,8 +157,8 @@ Use the getLastReview function below to do the following:
   For example: getLastReview(reviews) would return: "Reyna gave the restaurant a 3.5 star review, and their feedback was: this place is chill with really cool people, great for getting work done on weekdays".
 */
 
-function getLastReview(/*Your code here*/) {
-	/*Your code here*/
+function getLastReview(reviewArray) {
+	return getReviewByIndex(reviewArray, reviewArray.length - 1);
 }
 
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
@@ -173,10 +177,21 @@ Use the getReviewsByRating function below to do the following:
   ]
 */
 
-function getReviewByRating(/* code here */) {
-	/* code here */
-}
+function getReviewByRating(reviewArray, ratingRange) {
+	const reducedReviewArray = [];
 
+	for (let i = 0; i < reviewArray.length; i++) {
+		let currentReview = reviewArray[i];
+		if (
+			currentReview.rating >= ratingRange &&
+			currentReview.rating < ratingRange + 1
+		) {
+			reducedReviewArray.push(currentReview);
+		}
+	}
+	return reducedReviewArray;
+}
+console.log(getReviewByRating(reviews, 3));
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪
 Use the getLongReviews function below to do the following:
   1. Receive the array that holds all the reviews
@@ -190,10 +205,19 @@ Use the getLongReviews function below to do the following:
   ]
 */
 
-function getLongReviews(/* code here */) {
-	/* code here */
-}
+function getLongReviews(reviewsArray) {
+	const reducedReviewArray = [];
 
+	for (let i = 0; i < reviewsArray.length; i++) {
+		let currentReview = reviewsArray[i];
+		const wordCount = currentReview.feedback.split(' ').length;
+		if (wordCount > 15) {
+			reducedReviewArray.push(currentReview);
+		}
+	}
+	return reducedReviewArray;
+}
+console.log(getLongReviews(reviews));
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪
 This stretch goal does not use the reviews data!  You create your own object in this stretch goal.
 
@@ -211,9 +235,19 @@ Use the carMaker function below to do the following:
   It would return 110 because it was created with 10 as the odometer and we added 100 to it with the drive method
 */
 
-function carMaker(/* code here */) {
-	/* code here */
+function carMaker(currentMiles) {
+	return {
+		odometer: currentMiles,
+		drive: function (additionalMiles) {
+			this.odometer += additionalMiles;
+			return this.odometer;
+		},
+	};
 }
+const car1 = carMaker(10);
+console.log('car1: ', car1);
+console.log('car1.drive(100)', car1.drive(100));
+console.log('car1 after drive: ', car1);
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
 function foo() {
